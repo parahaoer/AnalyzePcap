@@ -48,7 +48,7 @@ def analyzePcap(filepath):
         ftxt.write("vnc_feature_count=" + str(vnc_feature_count) + "\n")
         for line in write_line:
             ftxt.write("\t" + line + "\n") 
-        ftxt.close()
+    ftxt.close()
 
     #print(type(data.payload))  #==><class 'scapy.layers.inet.IP'>  可以使用 help(scapy.layers.inet.IP) 查看帮助文档
 
@@ -131,7 +131,7 @@ def get_filelist(dir):
 
 vnc_file_count = 0
 
-get_filelist('C:\\Users\\dong\\Desktop\\workAtHome\\vnc协议\\vnc_concise.pcap')
+get_filelist('C:\\Users\\dong\\Desktop\\workAtHome\\dridex\\dridexPcap')
 
 print(vnc_file_count)
 
