@@ -55,7 +55,7 @@ def analyzePcap(filepath):
 def is_ipv4_tcp(data):
     
     ip_packet = data.payload
-    return ip_packet.fields['version'] == 4 and ip_packet.fields['proto'] == 6
+    return  data.fields['type'] == 2048 and ip_packet.fields['version'] == 4 and ip_packet.fields['proto'] == 6
 
 
 def getTcpPayloadLen(data):

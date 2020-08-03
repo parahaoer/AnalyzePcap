@@ -8,6 +8,8 @@ def analyzePcap(filepath):
     # data 是以太网 数据包
     data = s1.read_packet()
 
+    getTcpPayload(data)
+
     if(is_ipv4_tcp(data)):
         print("tcp")
 
@@ -30,7 +32,7 @@ def analyzePcap(filepath):
 def is_ipv4_tcp(data):
     
     ip_packet = data.payload
-    return ip_packet.fields['version'] == 4 and ip_packet.fields['proto'] == 6
+    return  data.fields['type'] == 2048 and ip_packet.fields['version'] == 4 and ip_packet.fields['proto'] == 6
     
 
 def getTcpPayloadLen(data):
@@ -56,7 +58,7 @@ def getTcpPayload(data):
     '''
     # print(tcp_payload.original[0])  # 82 , 转换成16进制是0x52, 与wireshark 中显示的相同。
     # print(tcp_payload.original) # b'RFB 003.008\n', 结果是以字节的值为ASCII值转换成相应的字符串（字符串前边的b表示是bytes对象）。
-    # print(tcp_payload.original.hex()) 
+    print(tcp_payload.original.hex()) 
     # print(type(tcp_payload.original))
     # print(type(tcp_payload.fields['load']))
     return tcp_payload.original

@@ -9,13 +9,11 @@ def analyzePcap(filepath):
 
     # data 是以太网 数据包
     data = s1.read_packet()
-    
+    data = s1.read_packet()
     print(len(data[IP]))   # 64, 表示 IP包有64个字节
-
-    dec_list = bytes_to_int(raw(data[IP]))
-    print(dec_list)
-    print(Counter(dec_list))   
-    print(Counter(raw(data[IP]))) # Counter(dec_list) 与  Counter(raw(data[IP])) 内容相同  
+    print(data[DNS].an.fields)
+    print(len(data[DNS].an))
+    print(type(data[DNS].an))
     # if(is_ipv4_tcp(data)):
     #     print("tcp")
 
@@ -48,7 +46,7 @@ def bytes_to_int(bytes):
 def is_ipv4_tcp(data):
     
     ip_packet = data.payload
-    return  data.fields['type'] == 2048 and ip_packet.fields['version'] == 4 and ip_packet.fields['proto'] == 6
+    return ip_packet.fields['version'] == 4 and ip_packet.fields['proto'] == 6
     
 
 def getTcpPayloadLen(data):
@@ -110,6 +108,6 @@ def hasFeature04(data):
     return tcp_payload_len == 8 and tcp_payload[0] == 4
 
 # analyzePcap('C:\\Users\\dong\\Desktop\\workAtHome\\vnc协议\\vnc_concise.pcap')
-analyzePcap('C:\\Users\\dong\\Documents\\WeChat Files\\wxid_njmfjwrjvua322\\FileStorage\\File\\2020-07\\vnc-sample.pcap')
+analyzePcap('dns.pcapng')
 
             
